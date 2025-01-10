@@ -1,0 +1,13 @@
+.slideList{
+    width: 470px;
+    height: 800px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: auto;
+}
+.slide{
+    border: 2px solid gray;
+}
+

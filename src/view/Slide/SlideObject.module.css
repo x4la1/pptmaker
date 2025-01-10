@@ -1,0 +1,63 @@
+.slideObject {
+    position: absolute;
+}
+
+.smalltext {
+    border: none;
+    position: absolute;
+    background-color: transparent;
+    margin: 0;
+    overflow: hidden;
+    resize: none;
+    outline: none;
+}
+
+.smalltext:focus {
+    border: none
+}
+
+.text {
+    border: none;
+    position: absolute;
+    background-color: transparent;
+    margin: 0;
+    overflow: hidden;
+    resize: none;
+    outline: none;
+}
+
+.text:focus {
+    border: none;
+}
+
+.leftUpPoint {
+    transform: translate(-50%, -50%);
+}
+
+.rightUpPoint {
+    transform: translate(60%, -50%);
+}
+
+.rightDownPoint {
+    transform: translate(60%, 60%);
+}
+
+.leftDownPoint {
+    transform: translate(-50%, 60%);
+}
+
+.upPoint {
+    transform: translate(0%, -50%);
+}
+
+.rightPoint {
+    transform: translate(60%, 0%);
+}
+
+.downPoint {
+    transform: translate(0%, 65%);
+}
+
+.leftPoint {
+    transform: translate(-50%, 0%);
+}

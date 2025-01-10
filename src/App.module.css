@@ -1,0 +1,15 @@
+#root {
+  max-width: 1440px;
+  max-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+}
+
+.read-the-docs {
+  color: #888;
+}
