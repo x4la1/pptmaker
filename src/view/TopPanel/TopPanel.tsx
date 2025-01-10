@@ -3,10 +3,12 @@ import { Button } from '../../components/Button/Button.tsx'
 import React, { ChangeEvent, useEffect, useRef } from 'react'
 import { EditorType } from '../../store/EditorType.ts'
 import Ajv from 'ajv'
+import jsPDF from 'jspdf'
 import { getSchema } from '../../utils/schema.ts'
 import { useAppActions } from '../Hooks/useAppActions.ts'
 import { useAppSelector } from '../Hooks/useAppSelector.ts'
 import { HistoryContext } from '../Hooks/historyContext.ts'
+import "../../assets/fonts/Roboto.js"
 function TopPanel() {
 
     const store: EditorType = useAppSelector((editor => editor))
@@ -177,8 +179,36 @@ function TopPanel() {
         }
     }
 
-    async function onDownloadPdf() {
+    function onDownloadPdf() {
+        const pdf = new jsPDF({
+            orientation: "landscape",
+            unit: "px",
+            format: [1122, 780]
+        })
+        store.presentation.slides.forEach((slide, index) => {
+            if (slide.background.type === "Solid") {
+                pdf.setFillColor(slide.background.color)
+                pdf.rect(0, 0, 1122, 780, "F")
+            } else if (slide.background.type === "Image") {
+                pdf.addImage(slide.background.src, "JPEG", 0, 0, 1122, 780)
+            }
 
+            slide.elements.forEach((element) => {
+                if (element.type === "TextObject") {
+                    pdf.setFont("Roboto");
+                    pdf.setFontSize(element.fontSize)
+                    pdf.setTextColor(element.fontColor || "#000000");
+                    pdf.text(element.value, element.position.x, element.position.y)
+
+                } else if (element.type === "ImageObject") {
+                    pdf.addImage(element.src, "JPEG", element.position.x, element.position.y, element.size.width, element.size.width);
+                }
+            })
+            if (index < store.presentation.slides.length - 1) {
+                pdf.addPage()
+            }
+        })
+        pdf.save(`${store.presentation.name}.pdf`)
     }
 
 
