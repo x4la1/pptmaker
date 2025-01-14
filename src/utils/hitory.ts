@@ -45,19 +45,17 @@ function initHistory(store: Store<EditorType>): HistoryType {
 
     function undo() {
         const lastState = undoStack.pop()
-        if (lastState) {
-            redoStack.push(store.getState())
-            isUndoRedo = true
-        }
+        redoStack.push(store.getState())
+        isUndoRedo = true
+
         return lastState
     }
 
     function redo() {
         const lastState = redoStack.pop()
-        if (lastState) {
-            undoStack.push(store.getState())
-            isUndoRedo = true
-        }
+        undoStack.push(store.getState())
+        isUndoRedo = true
+
         return lastState;
     }
 
