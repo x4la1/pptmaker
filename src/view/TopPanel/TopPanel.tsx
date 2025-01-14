@@ -144,12 +144,12 @@ function TopPanel() {
 
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
-            if (event.ctrlKey && event.code === "KeyZ") {
+            if ((event.ctrlKey || event.metaKey ) && event.code === "KeyZ") {
                 event.preventDefault()
                 onUndo()
             }
 
-            if (event.ctrlKey && event.code === "KeyY") {
+            if ((event.ctrlKey || event.metaKey ) && event.code === "KeyY") {
                 event.preventDefault()
                 onRedo()
             }

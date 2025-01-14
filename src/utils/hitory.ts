@@ -29,13 +29,10 @@ function initHistory(store: Store<EditorType>): HistoryType {
             if (editor === getLastItem(undoStack)) {
                 undoStack.pop()
                 redoStack.push(previousEditor)
-                console.log("Запихнули в реду")
             } else if (editor === getLastItem(redoStack)) {
                 redoStack.pop()
                 undoStack.push(previousEditor)
-                console.log("Запихнули в анду")
             } else {
-                console.log("Очистили реду")
                 undoStack.push(previousEditor)
                 redoStack = []
             }
@@ -45,17 +42,19 @@ function initHistory(store: Store<EditorType>): HistoryType {
 
     function undo() {
         const lastState = undoStack.pop()
-        redoStack.push(store.getState())
-        isUndoRedo = true
-
+        if (lastState) {
+            redoStack.push(store.getState())
+            isUndoRedo = true
+        }
         return lastState
     }
 
     function redo() {
         const lastState = redoStack.pop()
-        undoStack.push(store.getState())
-        isUndoRedo = true
-
+        if (lastState) {
+            undoStack.push(store.getState())
+            isUndoRedo = true
+        }
         return lastState;
     }
 

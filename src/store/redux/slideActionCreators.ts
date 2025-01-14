@@ -60,6 +60,13 @@ function changeTextObjectValue(value: string) {
     }
 }
 
+function moveSlideObject(slideId: string, objectId: string, ox: number, oy: number){
+    return{
+        type: ActionType.MOVE_SLIDE_OBJECT,
+        payload: {slideId, objectId, ox, oy}
+    }
+}
+
 export {
     createSlide,
     removeSlide,
@@ -70,5 +77,5 @@ export {
     changeBackgroundColor,
     changeBackgroundImage,
     changeTextObjectValue,
-
+    moveSlideObject
 }

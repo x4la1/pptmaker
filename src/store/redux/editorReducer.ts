@@ -15,6 +15,7 @@ import { setEditor } from "../setEditor";
 import { changeTextObjectValue } from "../changeTextObjectValue";
 import { setNextSlide } from "../setNextSlide";
 import { setPreviousSlide } from "../setPreviousSlide";
+import { moveObjectOnSlide } from "../moveSlideObject";
 
 function editorReducer(editor: EditorType = defaultEditor, action: EditorAction): EditorType {
     switch (action.type) {
@@ -46,6 +47,8 @@ function editorReducer(editor: EditorType = defaultEditor, action: EditorAction)
             return setNextSlide(editor)
         case ActionType.SET_PREVIOUS_SLIDE:
             return setPreviousSlide(editor)
+        case ActionType.MOVE_SLIDE_OBJECT:
+            return moveObjectOnSlide(editor, action)
         default:
             return editor
     }

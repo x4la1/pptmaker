@@ -15,8 +15,8 @@ enum ActionType {
     SET_EDITOR = 'setEditor',
     CHANGE_TEXT_OBJECT_VALUE = 'changeTextObjectValue',
     SET_NEXT_SLIDE = 'setNextSlide',
-    SET_PREVIOUS_SLIDE = 'setPreviousSlide'
-
+    SET_PREVIOUS_SLIDE = 'setPreviousSlide',
+    MOVE_SLIDE_OBJECT = 'moveSlideObject',
 }
 
 type AddSlideAction = {
@@ -83,11 +83,16 @@ type SetPreviousSlide = {
     type: ActionType.SET_PREVIOUS_SLIDE
 }
 
+type MoveSlideObjectAction ={
+    type: ActionType.MOVE_SLIDE_OBJECT,
+    payload: {slideId: string, objectId: string, ox: number, oy: number}
+}
+
 type EditorAction = AddSlideAction | SetSelectionAction | RemoveSlideAction
     | ChangeSlidePositionAction | ChangePresentationNameAction | CreateTextObjectAction
     | CreateImageObjectAction | DeleteSlideObjectAction | ChangeBackgroundColorAction |
     ChangeBackgroundImageAction | SetEditorAction | ChangeTextObjectValueAction |
-    SetNextSlide | SetPreviousSlide
+    SetNextSlide | SetPreviousSlide | MoveSlideObjectAction
 
 
 export {
@@ -104,5 +109,6 @@ export {
     type SetEditorAction,
     type ChangeTextObjectValueAction,
     type SetNextSlide,
-    type SetPreviousSlide
+    type SetPreviousSlide,
+    type MoveSlideObjectAction
 }
