@@ -8,6 +8,20 @@ function setSelection(newSelection: SelectionType) {
     }
 }
 
+function setNextSlide(){
+    return{
+        type: ActionType.SET_NEXT_SLIDE
+    }
+}
+
+function setPreviousSlide(){
+    return {
+        type: ActionType.SET_PREVIOUS_SLIDE
+    }
+}
+
 export {
     setSelection,
+    setNextSlide,
+    setPreviousSlide
 }

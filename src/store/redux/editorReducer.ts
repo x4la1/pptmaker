@@ -13,6 +13,8 @@ import { changeBackgroundColor } from "../changeBgColor";
 import { changeBackgroundImage } from "../changeBgImage";
 import { setEditor } from "../setEditor";
 import { changeTextObjectValue } from "../changeTextObjectValue";
+import { setNextSlide } from "../setNextSlide";
+import { setPreviousSlide } from "../setPreviousSlide";
 
 function editorReducer(editor: EditorType = defaultEditor, action: EditorAction): EditorType {
     switch (action.type) {
@@ -40,6 +42,10 @@ function editorReducer(editor: EditorType = defaultEditor, action: EditorAction)
             return setEditor(action)
         case ActionType.CHANGE_TEXT_OBJECT_VALUE:
             return changeTextObjectValue(editor, action)
+        case ActionType.SET_NEXT_SLIDE:
+            return setNextSlide(editor)
+        case ActionType.SET_PREVIOUS_SLIDE:
+            return setPreviousSlide(editor)
         default:
             return editor
     }

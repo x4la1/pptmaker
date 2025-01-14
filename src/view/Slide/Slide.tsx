@@ -5,6 +5,7 @@ import { TextObject } from './TextObject'
 import { ImageObject } from './ImageObject'
 import { useAppActions } from '../Hooks/useAppActions'
 
+
 const SLIDE_WIDTH = 1122
 const SLIDE_HEIGHT = 780
 
@@ -39,14 +40,14 @@ function Slide({ slide, scale = 1, className, isSelected, selectedObjectId }: Sl
         }
     }
 
-    if (isSelected && scale != 1) {
+    if (isSelected && scale < 1) {
         slideStyles.border = '3px solid #0b57d0'
     }
 
     function onObjectClick(event: React.MouseEvent, objectId: string): void {
         event.stopPropagation()
         setSelection({
-            selectedSlideId: slide.id,
+            selectedSlideId: slide.id ,
             selectedObjectId: objectId
         })
         console.log(objectId)
@@ -59,7 +60,7 @@ function Slide({ slide, scale = 1, className, isSelected, selectedObjectId }: Sl
         })
     }
 
-    if (scale != 1) {
+    if (scale < 1) {
         return (
             <div style={{ ...slideStyles, zIndex: "0" }} className={styles.slide + ' ' + className} onClick={onSlideClick}>
                 {slide.elements.map(slideObject => {

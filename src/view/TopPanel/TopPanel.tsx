@@ -1,6 +1,6 @@
 import styles from './TopPanel.module.css'
 import { Button } from '../../components/Button/Button.tsx'
-import React, { ChangeEvent, useEffect, useRef } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useContext } from 'react'
 import { EditorType } from '../../store/EditorType.ts'
 import Ajv from 'ajv'
 import jsPDF from 'jspdf'
@@ -9,6 +9,7 @@ import { useAppActions } from '../Hooks/useAppActions.ts'
 import { useAppSelector } from '../Hooks/useAppSelector.ts'
 import { HistoryContext } from '../Hooks/historyContext.ts'
 import "../../assets/fonts/Roboto.js"
+import { useNavigate } from 'react-router'
 function TopPanel() {
 
     const store: EditorType = useAppSelector((editor => editor))
@@ -108,8 +109,6 @@ function TopPanel() {
     }
 
 
-
-
     function jsonChangeHandler(event: ChangeEvent<HTMLInputElement>) {
         const ajv = new Ajv()
         const schema = getSchema()
@@ -141,27 +140,26 @@ function TopPanel() {
 
 
 
-    const history = React.useContext(HistoryContext)
+    const history = useContext(HistoryContext)
 
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
             if (event.ctrlKey && event.code === "KeyZ") {
-                event.preventDefault();
+                event.preventDefault()
                 onUndo()
             }
 
             if (event.ctrlKey && event.code === "KeyY") {
-                event.preventDefault();
+                event.preventDefault()
                 onRedo()
             }
         }
 
-        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keydown", handleKeyDown)
 
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-        };
-    }, []);
+        return () => document.removeEventListener("keydown", handleKeyDown)
+        
+    }, []) 
 
 
 
@@ -211,6 +209,7 @@ function TopPanel() {
         pdf.save(`${store.presentation.name}.pdf`)
     }
 
+    const navigate = useNavigate()
 
     return (
         <div className={styles.topPanel}>
@@ -232,6 +231,7 @@ function TopPanel() {
                 <Button className={styles.topPanel__button} type='text' value={'Скачать PDF'} onClick={onDownloadPdf} />
                 <Button className={styles.topPanel__button} type='text' value={'Undo'} onClick={onUndo} />
                 <Button className={styles.topPanel__button} type='text' value={'Redo'} onClick={onRedo} />
+                <Button className={styles.topPanel__button} type='text' value={'Слайд-шоу'} onClick={() => navigate('/player')} />
             </div>
         </div>
     )

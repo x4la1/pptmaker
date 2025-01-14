@@ -14,7 +14,8 @@ enum ActionType {
     CHANGE_BACKGROUND_IMAGE = 'changeBackgroundImage',
     SET_EDITOR = 'setEditor',
     CHANGE_TEXT_OBJECT_VALUE = 'changeTextObjectValue',
-
+    SET_NEXT_SLIDE = 'setNextSlide',
+    SET_PREVIOUS_SLIDE = 'setPreviousSlide'
 
 }
 
@@ -74,10 +75,19 @@ type ChangeTextObjectValueAction = {
     payload: string
 }
 
+type SetNextSlide = {
+    type: ActionType.SET_NEXT_SLIDE
+}
+
+type SetPreviousSlide = {
+    type: ActionType.SET_PREVIOUS_SLIDE
+}
+
 type EditorAction = AddSlideAction | SetSelectionAction | RemoveSlideAction
     | ChangeSlidePositionAction | ChangePresentationNameAction | CreateTextObjectAction
     | CreateImageObjectAction | DeleteSlideObjectAction | ChangeBackgroundColorAction |
-    ChangeBackgroundImageAction | SetEditorAction | ChangeTextObjectValueAction
+    ChangeBackgroundImageAction | SetEditorAction | ChangeTextObjectValueAction |
+    SetNextSlide | SetPreviousSlide
 
 
 export {
@@ -93,5 +103,6 @@ export {
     type ChangeBackgroundImageAction,
     type SetEditorAction,
     type ChangeTextObjectValueAction,
-
+    type SetNextSlide,
+    type SetPreviousSlide
 }
